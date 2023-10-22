@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "674413089533",
+    "firebase_url": "https://my-car-adbe4-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "my-car-adbe4",
+    "storage_bucket": "my-car-adbe4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:674413089533:android:e31af548078494f9116494",
+        "android_client_info": {
+          "package_name": "com.example.mycar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSrZMu3um6qxy8-1l4xM5b4w_ymSj141g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
