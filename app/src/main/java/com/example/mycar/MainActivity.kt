@@ -10,6 +10,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var buttonSignIn: Button
     private lateinit var buttonRegister: Button
     private lateinit var buttonSignOut: Button
+    private lateinit var buttonAddCar: Button
 
     private lateinit var authManager: AuthManager
 
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         buttonSignIn = findViewById(R.id.buttonSignIn)
         buttonRegister = findViewById(R.id.buttonRegister)
         buttonSignOut = findViewById(R.id.buttonSignOut)
+        buttonAddCar = findViewById(R.id.buttonAddCar)
 
         authManager = AuthManager(this)
 
@@ -27,6 +29,7 @@ class MainActivity : AppCompatActivity() {
             buttonSignIn.visibility = View.INVISIBLE
             buttonRegister.visibility = View.INVISIBLE
             buttonSignOut.visibility = View.VISIBLE
+            buttonAddCar.visibility = View.VISIBLE
         }
     }
 
@@ -43,5 +46,10 @@ class MainActivity : AppCompatActivity() {
     fun onButtonSignOutClick(view: View) {
         authManager.signOut()
         recreate()
+    }
+
+    fun onButtonAddCarClick(view: View) {
+        val intent = Intent(this, NewCarActivity::class.java)
+        startActivity(intent)
     }
 }

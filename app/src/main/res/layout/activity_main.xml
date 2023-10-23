@@ -23,28 +23,31 @@
 
     <Button
         android:id="@+id/buttonSignIn"
-        android:layout_width="160dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/black"
         android:onClick="onButtonSignInClick"
         android:text="Войти"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/buttonAddCar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.843" />
 
     <Button
         android:id="@+id/buttonAddCar"
-        android:layout_width="364dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="19dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="57dp"
         android:backgroundTint="@color/black"
+        android:onClick="onButtonAddCarClick"
         android:text="Добавить машину"
         android:textColor="@color/white"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
@@ -59,8 +62,11 @@
         android:onClick="onButtonRegisterClick"
         android:text="Зарегистрироваться"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/buttonAddCar"
-        app:layout_constraintTop_toTopOf="@+id/buttonSignIn" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSignIn"
+        app:layout_constraintVertical_bias="0.186" />
 
     <Button
         android:id="@+id/buttonSignOut"
@@ -73,7 +79,7 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.843" />
