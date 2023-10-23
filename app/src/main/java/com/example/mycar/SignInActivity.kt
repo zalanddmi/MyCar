@@ -1,5 +1,6 @@
 package com.example.mycar
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -10,14 +11,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-class SignInActivity : AppCompatActivity() {
+class SignInActivity : AppCompatActivity(), AuthManager.AuthCallback {
 
     private lateinit var editTextEmail: EditText
     private lateinit var editTextPassword: EditText
 
-    private lateinit var auth: FirebaseAuth
-    private lateinit var db: FirebaseDatabase
-    private lateinit var users: DatabaseReference
+    private lateinit var authManager: AuthManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,9 +25,8 @@ class SignInActivity : AppCompatActivity() {
         editTextEmail = findViewById(R.id.editTextEmail)
         editTextPassword = findViewById(R.id.editTextPassword)
 
-        auth = FirebaseAuth.getInstance()
-        db = FirebaseDatabase.getInstance()
-        users = db.getReference("Users")
+        authManager = AuthManager(this)
+        authManager.setAuthCallback(this)
     }
 
     fun onButtonSignInClick(view: View) {
@@ -44,12 +42,12 @@ class SignInActivity : AppCompatActivity() {
             Snackbar.make(view, "Введите пароль", Snackbar.LENGTH_SHORT).show()
             return
         }
-        auth.signInWithEmailAndPassword(editTextEmail.text.toString(), editTextPassword.text.toString())
-            .addOnSuccessListener {
-                Snackbar.make(view, "Вы вошли!", Snackbar.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener { e ->
-                Snackbar.make(view, e.message.toString(), Snackbar.LENGTH_SHORT).show()
-            }
+        authManager.signIn(editTextEmail.text.toString(), editTextPassword.text.toString(), view)
+    }
+
+    override fun onSuccess() {
+        finish()
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 }
