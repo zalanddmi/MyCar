@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdditionalCarActivity">
+
+    <Spinner
+        android:id="@+id/spinnerTypeFuel"
+        android:layout_width="207dp"
+        android:layout_height="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTypeFuel" />
+
+    <TextView
+        android:id="@+id/textViewVin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="VIN"
+        app:layout_constraintStart_toStartOf="@+id/editTextVin"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCarYear" />
+
+    <TextView
+        android:id="@+id/textViewAdditional"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Дополнительно"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewOptional"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="(Необязательно)"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAdditional" />
+
+    <TextView
+        android:id="@+id/textViewCarYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Год выпуска"
+        app:layout_constraintBottom_toTopOf="@+id/editTextCarYear"
+        app:layout_constraintStart_toStartOf="@+id/editTextCarYear" />
+
+    <EditText
+        android:id="@+id/editTextCarYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:ems="10"
+        android:hint="XXXX"
+        android:inputType="number"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewOptional" />
+
+    <EditText
+        android:id="@+id/editTextVin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="XXXXXXXXXXXXXXXXX"
+        android:inputType="text"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewVin" />
+
+    <TextView
+        android:id="@+id/textViewTypeBody"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Тип кузова"
+        app:layout_constraintStart_toStartOf="@+id/spinnerTypeBody"
+        app:layout_constraintTop_toBottomOf="@+id/editTextVin" />
+
+    <Spinner
+        android:id="@+id/spinnerTypeBody"
+        android:layout_width="207dp"
+        android:layout_height="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTypeBody" />
+
+    <TextView
+        android:id="@+id/textViewColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Цвет"
+        app:layout_constraintStart_toStartOf="@+id/spinnerColor"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerTypeBody" />
+
+    <Spinner
+        android:id="@+id/spinnerColor"
+        android:layout_width="207dp"
+        android:layout_height="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewColor" />
+
+    <TextView
+        android:id="@+id/textViewStateNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Гос. номер"
+        app:layout_constraintStart_toStartOf="@+id/editTextStateNumber"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerColor" />
+
+    <EditText
+        android:id="@+id/editTextStateNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="X000XX777"
+        android:inputType="text"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewStateNumber" />
+
+    <TextView
+        android:id="@+id/textViewTypeFuel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Вид топлива"
+        app:layout_constraintStart_toStartOf="@+id/spinnerTypeFuel"
+        app:layout_constraintTop_toBottomOf="@+id/editTextStateNumber" />
+
+    <TextView
+        android:id="@+id/textViewVolumeFuel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Объем бака (л)"
+        app:layout_constraintStart_toStartOf="@+id/editTextVolumeFuel"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerTypeFuel" />
+
+    <EditText
+        android:id="@+id/editTextVolumeFuel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="XX"
+        android:inputType="numberSigned"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewVolumeFuel" />
+
+    <Button
+        android:id="@+id/buttonReadyCar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/black"
+        android:text="Готово"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextVolumeFuel" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

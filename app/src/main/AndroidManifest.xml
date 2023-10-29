@@ -13,7 +13,16 @@
         android:theme="@style/Theme.MyCar"
         tools:targetApi="31">
         <activity
-            android:name=".NewCarActivity"
+            android:name=".AdditionalCarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MileageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ModelCarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MarkCarActivity"
             android:exported="false" />
         <activity
             android:name=".HomeActivity"

@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onButtonAddCarClick(view: View) {
-        val intent = Intent(this, NewCarActivity::class.java)
+        val intent = Intent(this, MarkCarActivity::class.java)
         startActivity(intent)
     }
 }
