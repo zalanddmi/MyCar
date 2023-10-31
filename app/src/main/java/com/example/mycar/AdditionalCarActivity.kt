@@ -1,5 +1,6 @@
 package com.example.mycar
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -54,17 +55,18 @@ class AdditionalCarActivity : AppCompatActivity() {
         db = FirebaseDatabase.getInstance()
         cars = db.getReference("Cars")
 
-        typeBodyList = mutableListOf("", "Седан", "Универсал", "Хэтчбек", "Лифтбэк",
+        typeBodyList = mutableListOf("Выберете тип кузова", "Седан", "Универсал", "Хэтчбек", "Лифтбэк",
             "Купе", "Лимузин", "Кабриолет", "Внедорожник")
-        colorList = mutableListOf("", "Красный", "Зеленый", "Синий", "Желтый", "Оранжевый",
+        colorList = mutableListOf("Выберете цвет", "Красный", "Зеленый", "Синий", "Желтый", "Оранжевый",
             "Фиолетовый", "Розовый", "Коричневый", "Серый", "Черный", "Белый", "Циан",
             "Пурпурный", "Лайм", "Бирюзовый", "Индиго")
-        typeFuelList = mutableListOf("", "Бензин", "Дизель", "Газ", "Газ + Бензин",
+        typeFuelList = mutableListOf("Выберете вид топлива", "Бензин", "Дизель", "Газ", "Газ + Бензин",
             "Электричество", "Гибрид")
 
         val typeBodyAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, typeBodyList)
         typeBodyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerTypeBody.adapter = typeBodyAdapter
+
         val colorAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, colorList)
         colorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerColor.adapter = colorAdapter
@@ -74,7 +76,7 @@ class AdditionalCarActivity : AppCompatActivity() {
 
         spinnerTypeBody.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                typeBody = typeBodyList[position]
+                typeBody = if (position != 0) typeBodyList[position] else ""
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -84,7 +86,7 @@ class AdditionalCarActivity : AppCompatActivity() {
 
         spinnerColor.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                color = colorList[position]
+                color = if (position != 0) colorList[position] else ""
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -94,7 +96,7 @@ class AdditionalCarActivity : AppCompatActivity() {
 
         spinnerTypeFuel.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                typeFuel = typeFuelList[position]
+                typeFuel = if (position != 0) typeFuelList[position] else ""
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -116,6 +118,10 @@ class AdditionalCarActivity : AppCompatActivity() {
             val newCar = cars.push()
             val uKey = newCar.key.toString()
             cars.child(uKey).setValue(car)
+
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }

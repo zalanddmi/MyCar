@@ -5,6 +5,7 @@ import android.view.View
 import com.example.mycar.models.User
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
@@ -59,5 +60,9 @@ class AuthManager(private val context: Context) {
 
     fun isUserSignedIn(): Boolean {
         return auth.currentUser != null
+    }
+
+    fun getCurrentUser(): FirebaseUser? {
+        return auth.currentUser
     }
 }

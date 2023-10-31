@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp">>
+
+    <TextView
+        android:id="@+id/textviewMarkItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Марка:" />
+
+    <TextView
+        android:id="@+id/textviewModelItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Модель:" />
+
+    <TextView
+        android:id="@+id/textviewMileageItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Пробег:" />
+
+</LinearLayout>

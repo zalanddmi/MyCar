@@ -8,7 +8,7 @@
 
     <Spinner
         android:id="@+id/spinnerTypeFuel"
-        android:layout_width="207dp"
+        android:layout_width="220dp"
         android:layout_height="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,6 +18,7 @@
         android:id="@+id/textViewVin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
         android:layout_marginTop="8dp"
         android:text="VIN"
         app:layout_constraintStart_toStartOf="@+id/editTextVin"
@@ -49,6 +50,7 @@
         android:id="@+id/textViewCarYear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
         android:text="Год выпуска"
         app:layout_constraintBottom_toTopOf="@+id/editTextCarYear"
         app:layout_constraintStart_toStartOf="@+id/editTextCarYear" />
@@ -84,12 +86,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Тип кузова"
-        app:layout_constraintStart_toStartOf="@+id/spinnerTypeBody"
+        app:layout_constraintStart_toStartOf="@+id/textViewVin"
         app:layout_constraintTop_toBottomOf="@+id/editTextVin" />
 
     <Spinner
         android:id="@+id/spinnerTypeBody"
-        android:layout_width="207dp"
+        android:layout_width="220dp"
         android:layout_height="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,12 +103,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Цвет"
-        app:layout_constraintStart_toStartOf="@+id/spinnerColor"
+        app:layout_constraintStart_toStartOf="@+id/textViewTypeBody"
         app:layout_constraintTop_toBottomOf="@+id/spinnerTypeBody" />
 
     <Spinner
         android:id="@+id/spinnerColor"
-        android:layout_width="207dp"
+        android:layout_width="220dp"
         android:layout_height="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -116,6 +118,7 @@
         android:id="@+id/textViewStateNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
         android:layout_marginTop="8dp"
         android:text="Гос. номер"
         app:layout_constraintStart_toStartOf="@+id/editTextStateNumber"
@@ -139,13 +142,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Вид топлива"
-        app:layout_constraintStart_toStartOf="@+id/spinnerTypeFuel"
+        app:layout_constraintStart_toStartOf="@+id/textViewStateNumber"
         app:layout_constraintTop_toBottomOf="@+id/editTextStateNumber" />
 
     <TextView
         android:id="@+id/textViewVolumeFuel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
         android:layout_marginTop="8dp"
         android:text="Объем бака (л)"
         app:layout_constraintStart_toStartOf="@+id/editTextVolumeFuel"
@@ -167,7 +171,7 @@
         android:id="@+id/buttonReadyCar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/black"
         android:text="Готово"
         android:textColor="@color/white"
