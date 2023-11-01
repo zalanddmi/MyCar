@@ -54,7 +54,14 @@ class HomeActivity : AppCompatActivity() {
                     listCar.add(car)
                 }
 
-                val adapter = CarItemAdapter(listCar)
+                val adapter = CarItemAdapter(listCar, object : CarItemAdapter.OnItemClickListener {
+                    override fun onItemClick(position: Int) {
+                        val carId = listCarId[position]
+                        val intent = Intent(this@HomeActivity, CarDetailsActivity::class.java)
+                        intent.putExtra("carId", carId)
+                        startActivity(intent)
+                    }
+                })
                 recyclerViewCarItems.adapter = adapter
             }
 

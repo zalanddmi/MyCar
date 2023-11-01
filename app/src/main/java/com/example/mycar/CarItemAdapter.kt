@@ -7,11 +7,21 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mycar.models.Car
 
-class CarItemAdapter(private val cars: List<Car>) : RecyclerView.Adapter<CarItemAdapter.ViewHolder>() {
+class CarItemAdapter(private val cars: List<Car>, private val listener: OnItemClickListener) : RecyclerView.Adapter<CarItemAdapter.ViewHolder>() {
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textviewMarkItem: TextView = itemView.findViewById(R.id.textviewMarkItem)
         val textviewModelItem: TextView = itemView.findViewById(R.id.textviewModelItem)
         val textviewMileageItem: TextView = itemView.findViewById(R.id.textviewMileageItem)
+
+        init {
+            itemView.setOnClickListener {
+                listener.onItemClick(adapterPosition)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
