@@ -13,31 +13,31 @@
         android:theme="@style/Theme.MyCar"
         tools:targetApi="31">
         <activity
-            android:name=".CarDetailsActivity"
+            android:name=".activities.CarDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".AdditionalCarActivity"
+            android:name=".activities.AdditionalCarActivity"
             android:exported="false" />
         <activity
-            android:name=".MileageActivity"
+            android:name=".activities.MileageActivity"
             android:exported="false" />
         <activity
-            android:name=".ModelCarActivity"
+            android:name=".activities.ModelCarActivity"
             android:exported="false" />
         <activity
-            android:name=".MarkCarActivity"
+            android:name=".activities.MarkCarActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".activities.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".SignInActivity"
+            android:name=".activities.SignInActivity"
             android:exported="false" />
         <activity
-            android:name=".RegistryActivity"
+            android:name=".activities.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.StartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

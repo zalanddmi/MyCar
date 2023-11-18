@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activities.StartActivity">
 
     <TextView
         android:id="@+id/textViewMyCar"
@@ -26,7 +26,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/black"
-        android:onClick="onButtonSignInClick"
         android:text="Войти"
         android:textColor="@color/white"
         android:visibility="invisible"
@@ -43,7 +42,6 @@
         android:layout_marginTop="19dp"
         android:layout_marginBottom="57dp"
         android:backgroundTint="@color/black"
-        android:onClick="onButtonAddCarClick"
         android:text="Добавить машину"
         android:textColor="@color/white"
         android:visibility="invisible"
@@ -54,11 +52,10 @@
         app:layout_constraintTop_toBottomOf="@+id/buttonSignIn" />
 
     <Button
-        android:id="@+id/buttonRegister"
+        android:id="@+id/buttonSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/black"
-        android:onClick="onButtonRegisterClick"
         android:text="Зарегистрироваться"
         android:textColor="@color/white"
         android:visibility="invisible"
@@ -73,7 +70,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/black"
-        android:onClick="onButtonSignOutClick"
         android:text="Выйти"
         android:textColor="@color/white"
         android:visibility="invisible"

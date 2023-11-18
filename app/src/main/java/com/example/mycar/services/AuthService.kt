@@ -1,15 +1,14 @@
-package com.example.mycar
+package com.example.mycar.services
 
 import android.content.Context
 import android.view.View
-import com.example.mycar.models.User
+import com.example.mycar.entities.User
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-class AuthManager(private val context: Context) {
+class AuthService {
     interface AuthCallback {
         fun onSuccess()
     }
@@ -56,10 +55,6 @@ class AuthManager(private val context: Context) {
 
     fun signOut() {
         auth.signOut()
-    }
-
-    fun isUserSignedIn(): Boolean {
-        return auth.currentUser != null
     }
 
     fun getCurrentUser(): FirebaseUser? {

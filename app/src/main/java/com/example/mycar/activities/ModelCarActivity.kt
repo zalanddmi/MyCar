@@ -1,4 +1,4 @@
-package com.example.mycar
+package com.example.mycar.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.SearchView
+import com.example.mycar.R
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import okhttp3.*

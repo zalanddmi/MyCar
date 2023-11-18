@@ -1,22 +1,22 @@
-package com.example.mycar
+package com.example.mycar.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
-import com.example.mycar.models.User
+import com.example.mycar.services.AuthService
+import com.example.mycar.R
+import com.example.mycar.controllers.SignInController
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 
-class SignInActivity : AppCompatActivity(), AuthManager.AuthCallback {
-
+class SignInActivity : AppCompatActivity(){
     private lateinit var editTextEmail: EditText
     private lateinit var editTextPassword: EditText
+    private lateinit var buttonSignInUser: Button
 
-    private lateinit var authManager: AuthManager
+    private lateinit var controller: SignInController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,13 +24,13 @@ class SignInActivity : AppCompatActivity(), AuthManager.AuthCallback {
 
         editTextEmail = findViewById(R.id.editTextEmail)
         editTextPassword = findViewById(R.id.editTextPassword)
+        buttonSignInUser = findViewById(R.id.buttonSignInUser)
 
-        authManager = AuthManager(this)
-        authManager.setAuthCallback(this)
-    }
+        controller = SignInController(this)
 
-    fun onButtonSignInClick(view: View) {
-        signInUser(view)
+        buttonSignInUser.setOnClickListener {view ->
+            signInUser(view)
+        }
     }
 
     private fun signInUser(view: View) {
@@ -42,12 +42,6 @@ class SignInActivity : AppCompatActivity(), AuthManager.AuthCallback {
             Snackbar.make(view, "Введите пароль", Snackbar.LENGTH_SHORT).show()
             return
         }
-        authManager.signIn(editTextEmail.text.toString(), editTextPassword.text.toString(), view)
-    }
-
-    override fun onSuccess() {
-        finish()
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        controller.signIn(editTextEmail.text.toString(), editTextPassword.text.toString(), view)
     }
 }

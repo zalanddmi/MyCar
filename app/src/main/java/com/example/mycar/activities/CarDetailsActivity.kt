@@ -1,8 +1,10 @@
-package com.example.mycar
+package com.example.mycar.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import com.example.mycar.R
+import com.example.mycar.controllers.CarDetailsController
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -21,8 +23,7 @@ class CarDetailsActivity : AppCompatActivity() {
     private lateinit var textViewTypeFuelCarDetailsValue: TextView
     private lateinit var textViewVolumeFuelCarDetailsValue: TextView
 
-    private lateinit var db: FirebaseDatabase
-    private lateinit var cars: DatabaseReference
+    private lateinit var controller: CarDetailsController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,29 +40,20 @@ class CarDetailsActivity : AppCompatActivity() {
         textViewTypeFuelCarDetailsValue = findViewById(R.id.textViewTypeFuelCarDetailsValue)
         textViewVolumeFuelCarDetailsValue = findViewById(R.id.textViewVolumeFuelCarDetailsValue)
 
-        db = FirebaseDatabase.getInstance()
-        cars = db.getReference("Cars")
+        controller = CarDetailsController()
         val carId = intent.getStringExtra("carId")
-        val query = cars.child(carId!!)
-        query.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    textViewMarkCarDetailsValue.text = dataSnapshot.child("mark").getValue(String::class.java)
-                    textViewModelCarDetailsValue.text = dataSnapshot.child("model").getValue(String::class.java)
-                    textViewMileageCarDetailsValue.text = "${dataSnapshot.child("mileage").getValue(Int::class.java)} км"
-                    textViewCarYearCarDetailsValue.text = dataSnapshot.child("carYear").getValue(Int::class.java).toString()
-                    textViewVinCarDetailsValue.text = if (dataSnapshot.child("vin").exists()) dataSnapshot.child("vin").getValue(String::class.java) else ""
-                    textViewTypeBodyCarDetailsValue.text = if (dataSnapshot.child("typeBody").exists()) dataSnapshot.child("typeBody").getValue(String::class.java) else ""
-                    textViewColorCarDetailsValue.text = if (dataSnapshot.child("color").exists()) dataSnapshot.child("color").getValue(String::class.java) else ""
-                    textViewStateNumberCarDetailsValue.text = if (dataSnapshot.child("stateNumber").exists()) dataSnapshot.child("stateNumber").getValue(String::class.java) else ""
-                    textViewTypeFuelCarDetailsValue.text = if (dataSnapshot.child("typeFuel").exists()) dataSnapshot.child("typeFuel").getValue(String::class.java) else ""
-                    textViewVolumeFuelCarDetailsValue.text = "${dataSnapshot.child("volumeFuel").getValue(Int::class.java)} л"
-                }
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-        })
+        controller.getCarDetails(carId!!) { details ->
+            textViewMarkCarDetailsValue.text = details[0]
+            textViewModelCarDetailsValue.text = details[1]
+            textViewMileageCarDetailsValue.text = details[2]
+            textViewCarYearCarDetailsValue.text = details[3]
+            textViewVinCarDetailsValue.text = details[4]
+            textViewTypeBodyCarDetailsValue.text = details[5]
+            textViewColorCarDetailsValue.text = details[6]
+            textViewStateNumberCarDetailsValue.text = details[7]
+            textViewTypeFuelCarDetailsValue.text = details[8]
+            textViewVolumeFuelCarDetailsValue.text = details[9]
+        }
     }
 }

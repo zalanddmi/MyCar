@@ -1,44 +1,41 @@
-package com.example.mycar
+package com.example.mycar.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
-import com.example.mycar.models.User
-import com.google.android.gms.tasks.OnSuccessListener
+import com.example.mycar.services.AuthService
+import com.example.mycar.R
+import com.example.mycar.controllers.SignUpController
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.Firebase
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 
-class RegistryActivity : AppCompatActivity(), AuthManager.AuthCallback {
+class SignUpActivity : AppCompatActivity(){
 
     private lateinit var editTextFirstName: EditText
     private lateinit var editTextLastName: EditText
     private lateinit var editTextEmail: EditText
     private lateinit var editTextPassword: EditText
+    private lateinit var buttonSignUpUser: Button
 
-    private lateinit var authManager: AuthManager
+    private lateinit var controller: SignUpController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_registry)
+        setContentView(R.layout.activity_sign_up)
 
         editTextFirstName = findViewById(R.id.editTextFirstName)
         editTextLastName = findViewById(R.id.editTextLastName)
         editTextEmail = findViewById(R.id.editTextEmail)
         editTextPassword = findViewById(R.id.editTextPassword)
+        buttonSignUpUser = findViewById(R.id.buttonSignUpUser)
 
-        authManager = AuthManager(this)
-        authManager.setAuthCallback(this)
-    }
+        controller = SignUpController(this)
 
-    fun onButtonSignUpClick(view: View) {
-        signUpUser(view)
+        buttonSignUpUser.setOnClickListener { view ->
+            signUpUser(view)
+        }
     }
 
     private fun signUpUser(view: View) {
@@ -58,12 +55,6 @@ class RegistryActivity : AppCompatActivity(), AuthManager.AuthCallback {
             Snackbar.make(view, "Введите пароль", Snackbar.LENGTH_SHORT).show()
             return
         }
-        authManager.signUp(editTextFirstName.text.toString(), editTextLastName.text.toString(), editTextEmail.text.toString(), editTextPassword.text.toString(), view)
-    }
-
-    override fun onSuccess() {
-        finish()
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        controller.signUp(editTextFirstName.text.toString(), editTextLastName.text.toString(), editTextEmail.text.toString(), editTextPassword.text.toString(), view)
     }
 }

@@ -1,4 +1,4 @@
-package com.example.mycar
+package com.example.mycar.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +9,8 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
-import com.example.mycar.models.Car
+import com.example.mycar.R
+import com.example.mycar.entities.Car
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
