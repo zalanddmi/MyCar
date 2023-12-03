@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.RefuelingActivity">
+
+    <TextView
+        android:id="@+id/textViewRefueling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Заправка"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textViewDateRefueling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:text="Дата"
+        app:layout_constraintBottom_toTopOf="@+id/editTextDateRefueling"
+        app:layout_constraintStart_toStartOf="@+id/editTextDateRefueling" />
+
+    <EditText
+        android:id="@+id/editTextDateRefueling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:focusable="false"
+        android:ems="10"
+        android:hint="ДД/ММ/ГГГГ"
+        android:inputType="none"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRefueling" />
+
+    <TextView
+        android:id="@+id/textViewTypeFuelRefueling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Вид топлива"
+        app:layout_constraintStart_toStartOf="@+id/textViewDateRefueling"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDateRefueling" />
+
+    <Spinner
+        android:id="@+id/spinnerTypeFuelRefueling"
+        android:layout_width="220dp"
+        android:layout_height="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTypeFuelRefueling" />
+
+    <TextView
+        android:id="@+id/textViewSumRefueling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:text="Сумма"
+        app:layout_constraintStart_toStartOf="@+id/editTextSumRefueling"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerTypeFuelRefueling" />
+
+    <EditText
+        android:id="@+id/editTextSumRefueling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Х рублей"
+        android:inputType="number"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSumRefueling" />
+
+    <TextView
+        android:id="@+id/textViewVolumeRefueling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:text="Литры"
+        app:layout_constraintStart_toStartOf="@+id/editTextVolumeRefueling"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSumRefueling" />
+
+    <EditText
+        android:id="@+id/editTextVolumeRefueling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="ХX"
+        android:inputType="number"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewVolumeRefueling" />
+
+    <TextView
+        android:id="@+id/textViewMileageRefueling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:text="Пробег"
+        app:layout_constraintStart_toStartOf="@+id/editTextMileageRefueling"
+        app:layout_constraintTop_toBottomOf="@+id/editTextVolumeRefueling" />
+
+    <EditText
+        android:id="@+id/editTextMileageRefueling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="XX км"
+        android:inputType="number"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMileageRefueling" />
+
+    <TextView
+        android:id="@+id/textViewStationRefueling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:text="АЗС"
+        app:layout_constraintStart_toStartOf="@+id/editTextStationRefueling"
+        app:layout_constraintTop_toBottomOf="@+id/editTextMileageRefueling" />
+
+    <EditText
+        android:id="@+id/editTextStationRefueling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="АЗС"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewStationRefueling" />
+
+    <Button
+        android:id="@+id/buttonReadyRefueling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/black"
+        android:text="Готово"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextStationRefueling" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

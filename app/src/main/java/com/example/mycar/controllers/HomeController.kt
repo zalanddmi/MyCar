@@ -2,8 +2,7 @@ package com.example.mycar.controllers
 
 import android.content.Context
 import android.content.Intent
-import com.example.mycar.CarItemAdapter
-import com.example.mycar.activities.CarDetailsActivity
+import com.example.mycar.adapters.CarItemAdapter
 import com.example.mycar.activities.StartActivity
 import com.example.mycar.entities.Car
 import com.example.mycar.services.AuthService

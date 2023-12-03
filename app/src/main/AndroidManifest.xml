@@ -13,6 +13,12 @@
         android:theme="@style/Theme.MyCar"
         tools:targetApi="31">
         <activity
+            android:name=".activities.ServiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.RefuelingActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.CarDetailsActivity"
             android:exported="false" />
         <activity

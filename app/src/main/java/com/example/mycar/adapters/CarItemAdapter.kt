@@ -1,10 +1,11 @@
-package com.example.mycar
+package com.example.mycar.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mycar.R
 import com.example.mycar.entities.Car
 
 class CarItemAdapter(private val cars: List<Car>, private val listener: OnItemClickListener) : RecyclerView.Adapter<CarItemAdapter.ViewHolder>() {

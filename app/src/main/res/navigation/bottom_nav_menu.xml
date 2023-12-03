@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_refueling"
+        android:icon="@drawable/ic_refueling_foreground" />
+    <item
+        android:id="@+id/action_service"
+        android:icon="@drawable/ic_service_foreground" />
+    <item
+        android:id="@+id/action_statistics"
+        android:icon="@drawable/ic_statistics_foreground" />
+    <item
+        android:id="@+id/action_history"
+        android:icon="@drawable/ic_history_foreground" />
+</menu>

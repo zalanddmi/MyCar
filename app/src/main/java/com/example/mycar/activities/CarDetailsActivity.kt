@@ -1,10 +1,12 @@
 package com.example.mycar.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import com.example.mycar.R
 import com.example.mycar.controllers.CarDetailsController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -22,6 +24,7 @@ class CarDetailsActivity : AppCompatActivity() {
     private lateinit var textViewStateNumberCarDetailsValue: TextView
     private lateinit var textViewTypeFuelCarDetailsValue: TextView
     private lateinit var textViewVolumeFuelCarDetailsValue: TextView
+    private lateinit var bottomNavigationView: BottomNavigationView
 
     private lateinit var controller: CarDetailsController
 
@@ -39,6 +42,7 @@ class CarDetailsActivity : AppCompatActivity() {
         textViewStateNumberCarDetailsValue = findViewById(R.id.textViewStateNumberCarDetailsValue)
         textViewTypeFuelCarDetailsValue = findViewById(R.id.textViewTypeFuelCarDetailsValue)
         textViewVolumeFuelCarDetailsValue = findViewById(R.id.textViewVolumeFuelCarDetailsValue)
+        bottomNavigationView = findViewById(R.id.bottomNavigationView)
 
         controller = CarDetailsController()
         val carId = intent.getStringExtra("carId")
@@ -54,6 +58,24 @@ class CarDetailsActivity : AppCompatActivity() {
             textViewStateNumberCarDetailsValue.text = details[7]
             textViewTypeFuelCarDetailsValue.text = details[8]
             textViewVolumeFuelCarDetailsValue.text = details[9]
+        }
+
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.action_refueling -> {
+                    val intent = Intent(this, RefuelingActivity::class.java)
+                    intent.putExtra("carId", carId)
+                    startActivity(intent)
+                    true
+                }
+                R.id.action_service -> {
+                    val intent = Intent(this, ServiceActivity::class.java)
+                    intent.putExtra("carId", carId)
+                    startActivity(intent)
+                    true
+                }
+                else -> false
+            }
         }
     }
 }

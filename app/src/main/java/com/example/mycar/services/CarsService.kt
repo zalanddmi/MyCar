@@ -2,7 +2,7 @@ package com.example.mycar.services
 
 import android.content.Context
 import android.content.Intent
-import com.example.mycar.CarItemAdapter
+import com.example.mycar.adapters.CarItemAdapter
 import com.example.mycar.activities.CarDetailsActivity
 import com.example.mycar.entities.Car
 import com.google.firebase.auth.FirebaseUser

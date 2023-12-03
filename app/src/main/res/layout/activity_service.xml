@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ServiceActivity">
+
+    <TextView
+        android:id="@+id/textViewService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Сервис"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textViewDateService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:text="Дата"
+        app:layout_constraintBottom_toTopOf="@+id/editTextDateService"
+        app:layout_constraintStart_toStartOf="@+id/editTextDateService" />
+
+    <EditText
+        android:id="@+id/editTextDateService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:focusable="false"
+        android:ems="10"
+        android:hint="ДД/ММ/ГГГГ"
+        android:inputType="none"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewService" />
+
+    <TextView
+        android:id="@+id/textViewTypeService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Услуга"
+        app:layout_constraintStart_toStartOf="@+id/textViewDateService"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDateService" />
+
+    <Spinner
+        android:id="@+id/spinnerTypeService"
+        android:layout_width="220dp"
+        android:layout_height="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTypeService" />
+
+    <TextView
+        android:id="@+id/textViewSumService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:text="Сумма"
+        app:layout_constraintStart_toStartOf="@+id/editTextSumService"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerTypeService" />
+
+    <EditText
+        android:id="@+id/editTextSumService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Х рублей"
+        android:inputType="number"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSumService" />
+
+    <TextView
+        android:id="@+id/textViewMileageService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:text="Пробег"
+        app:layout_constraintStart_toStartOf="@+id/editTextMileageService"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSumService" />
+
+    <EditText
+        android:id="@+id/editTextMileageService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="ХX км"
+        android:inputType="number"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMileageService" />
+
+    <Button
+        android:id="@+id/buttonReadyService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/black"
+        android:text="Готово"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextMileageService" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
