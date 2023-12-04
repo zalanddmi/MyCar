@@ -74,6 +74,12 @@ class CarDetailsActivity : AppCompatActivity() {
                     startActivity(intent)
                     true
                 }
+                R.id.action_history -> {
+                    val intent = Intent(this, HistoryActivity::class.java)
+                    intent.putExtra("carId", carId)
+                    startActivity(intent)
+                    true
+                }
                 else -> false
             }
         }
