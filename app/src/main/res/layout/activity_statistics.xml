@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.StatisticsActivity">
+
+    <TextView
+        android:id="@+id/textViewStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="Статистика"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextDateFromStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:ems="7"
+        android:focusable="false"
+        android:hint="ДД/ММ/ГГГГ"
+        android:inputType="none"
+        android:minHeight="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewStatistics" />
+
+    <EditText
+        android:id="@+id/editTextDateToStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:ems="7"
+        android:focusable="false"
+        android:hint="ДД/ММ/ГГГГ"
+        android:inputType="none"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewStatistics" />
+
+    <TextView
+        android:id="@+id/textViewPeriod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:textColor="@color/black"
+        android:textSize="48dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/editTextDateToStatistics"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toEndOf="@+id/editTextDateFromStatistics"
+        app:layout_constraintTop_toTopOf="@+id/editTextDateToStatistics" />
+
+    <TextView
+        android:id="@+id/textViewExtensesStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Расходы"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/editTextDateFromStatistics"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDateFromStatistics" />
+
+    <TextView
+        android:id="@+id/textViewRefuelingStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Топливо:"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/textViewExtensesStatistics"
+        app:layout_constraintTop_toBottomOf="@+id/textViewExtensesStatistics" />
+
+    <TextView
+        android:id="@+id/textViewRefuelingDataStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="0 рублей (100%)"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewRefuelingStatistics"
+        app:layout_constraintStart_toEndOf="@+id/textViewRefuelingStatistics" />
+
+    <TextView
+        android:id="@+id/textViewServiceStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Сервис:"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/textViewRefuelingStatistics"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRefuelingStatistics" />
+
+    <TextView
+        android:id="@+id/textViewServiceDataStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0 рублей (100%)"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewServiceStatistics"
+        app:layout_constraintStart_toStartOf="@+id/textViewRefuelingDataStatistics" />
+
+    <TextView
+        android:id="@+id/textViewMileageStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Пробег:"
+        app:layout_constraintStart_toStartOf="@+id/textViewServiceStatistics"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAllExpensesStatistics" />
+
+    <TextView
+        android:id="@+id/textViewMileageDataStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0 км"
+        app:layout_constraintEnd_toEndOf="@+id/editTextDateToStatistics"
+        app:layout_constraintTop_toTopOf="@+id/textViewMileageStatistics" />
+
+    <TextView
+        android:id="@+id/textViewFuelMileageStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Расход топлива:"
+        app:layout_constraintStart_toStartOf="@+id/textViewMileageStatistics"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMileageStatistics" />
+
+    <TextView
+        android:id="@+id/textViewFuelMileageDataStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0 л/100 км"
+        app:layout_constraintEnd_toEndOf="@+id/textViewMileageDataStatistics"
+        app:layout_constraintTop_toTopOf="@+id/textViewFuelMileageStatistics" />
+
+    <TextView
+        android:id="@+id/textViewRefuelingMileageStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Пробег между заправками:"
+        app:layout_constraintStart_toStartOf="@+id/textViewFuelMileageStatistics"
+        app:layout_constraintTop_toBottomOf="@+id/textViewFuelMileageStatistics" />
+
+    <TextView
+        android:id="@+id/textViewRefuelingMileageDataStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0 км"
+        app:layout_constraintEnd_toEndOf="@+id/textViewFuelMileageDataStatistics"
+        app:layout_constraintTop_toTopOf="@+id/textViewRefuelingMileageStatistics" />
+
+    <TextView
+        android:id="@+id/textViewRefuelingDayStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Дней между заправками:"
+        app:layout_constraintStart_toStartOf="@+id/textViewRefuelingMileageStatistics"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRefuelingMileageStatistics" />
+
+    <TextView
+        android:id="@+id/textViewRefuelingDayDataStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0 д"
+        app:layout_constraintEnd_toEndOf="@+id/textViewRefuelingMileageDataStatistics"
+        app:layout_constraintTop_toTopOf="@+id/textViewRefuelingDayStatistics" />
+
+    <TextView
+        android:id="@+id/textViewAllExpensesStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Всего:"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/textViewServiceStatistics"
+        app:layout_constraintTop_toBottomOf="@+id/textViewServiceStatistics" />
+
+    <TextView
+        android:id="@+id/textViewAllExpensesDataStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0 рублей"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAllExpensesStatistics"
+        app:layout_constraintStart_toStartOf="@+id/textViewServiceDataStatistics" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
