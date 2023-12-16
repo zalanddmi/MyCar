@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".activities.ServiceActivity">
 
+    <Button
+        android:id="@+id/buttonDeleteService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#FF0000"
+        android:text="Удалить"
+        android:textColor="@color/white"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonReadyService" />
+
     <TextView
         android:id="@+id/textViewService"
         android:layout_width="wrap_content"

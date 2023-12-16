@@ -28,6 +28,7 @@ class RefuelingActivity : AppCompatActivity() {
     private lateinit var editTextMileageRefueling: EditText
     private lateinit var editTextStationRefueling: EditText
     private lateinit var buttonReadyRefueling: Button
+    private lateinit var buttonDeleteRefueling: Button
 
     private lateinit var controller: RefuelingController
 
@@ -50,6 +51,7 @@ class RefuelingActivity : AppCompatActivity() {
         editTextMileageRefueling = findViewById(R.id.editTextMileageRefueling)
         editTextStationRefueling = findViewById(R.id.editTextStationRefueling)
         buttonReadyRefueling = findViewById(R.id.buttonReadyRefueling)
+        buttonDeleteRefueling = findViewById(R.id.buttonDeleteRefueling)
 
         controller = RefuelingController()
 
@@ -57,6 +59,17 @@ class RefuelingActivity : AppCompatActivity() {
 
         editTextDateRefueling.setOnClickListener {
             val currentDate = Calendar.getInstance()
+
+            val initialDate: Calendar
+            val currentDateString = editTextDateRefueling.text.toString()
+            if (currentDateString.isNotEmpty()) {
+                val date = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(currentDateString)
+                initialDate = Calendar.getInstance().apply {
+                    time = date
+                }
+            } else {
+                initialDate = currentDate
+            }
 
             val datePickerDialog = DatePickerDialog(
                 this,
@@ -69,9 +82,9 @@ class RefuelingActivity : AppCompatActivity() {
 
                     editTextDateRefueling.setText(formattedDate)
                 },
-                currentDate.get(Calendar.YEAR),
-                currentDate.get(Calendar.MONTH),
-                currentDate.get(Calendar.DAY_OF_MONTH)
+                initialDate.get(Calendar.YEAR),
+                initialDate.get(Calendar.MONTH),
+                initialDate.get(Calendar.DAY_OF_MONTH)
             )
 
             datePickerDialog.show()
@@ -94,13 +107,37 @@ class RefuelingActivity : AppCompatActivity() {
             }
         }
 
+        var expenseId = intent.getStringExtra("expenseId")
+        if (expenseId != null) {
+            buttonDeleteRefueling.visibility = View.VISIBLE
+            controller.getService(expenseId) { result ->
+                editTextDateRefueling.setText(result[0])
+                val index = typeFuelList.indexOf(result[1])
+                spinnerTypeFuelRefueling.setSelection(index)
+                editTextSumRefueling.setText(result[2])
+                editTextVolumeRefueling.setText(result[3])
+                editTextMileageRefueling.setText(result[4])
+                editTextStationRefueling.setText(result[5])
+            }
+        }
+
         buttonReadyRefueling.setOnClickListener {
             date = editTextDateRefueling.text.toString()
             sum = if (!editTextSumRefueling.text.isNullOrEmpty()) editTextSumRefueling.text.toString().toDouble() else 0.0
             volume = if (!editTextVolumeRefueling.text.isNullOrEmpty()) editTextVolumeRefueling.text.toString().toDouble() else 0.0
             mileage = if (!editTextMileageRefueling.text.isNullOrEmpty()) editTextMileageRefueling.text.toString().toInt() else 0
             station = if (!editTextStationRefueling.text.isNullOrEmpty()) editTextStationRefueling.text.toString() else ""
-            controller.addRefueling(date, typeFuel, sum, volume, mileage, station, carId)
+            if (expenseId != null) {
+                controller.updateRefueling(expenseId, date, typeFuel, sum, volume, mileage, station, carId, this)
+            }
+            else {
+                controller.addRefueling(date, typeFuel, sum, volume, mileage, station, carId)
+            }
+            finish()
+        }
+
+        buttonDeleteRefueling.setOnClickListener {
+            controller.deleteRefueling(expenseId!!, carId, this)
             finish()
         }
     }

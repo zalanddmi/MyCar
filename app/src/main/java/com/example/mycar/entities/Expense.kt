@@ -8,5 +8,6 @@ data class Expense(
     val mileage: Int,
     val station: String? = null,
     val carId: String,
-    val isService: Boolean
+    val isService: Boolean,
+    val expenseId: String? = null
 )

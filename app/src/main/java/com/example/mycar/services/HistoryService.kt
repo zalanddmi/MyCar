@@ -3,6 +3,9 @@ package com.example.mycar.services
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import com.example.mycar.activities.CarDetailsActivity
+import com.example.mycar.activities.RefuelingActivity
+import com.example.mycar.activities.ServiceActivity
 import com.example.mycar.adapters.HistoryItemAdapter
 import com.example.mycar.entities.Car
 import com.example.mycar.entities.Expense
@@ -46,7 +49,8 @@ class HistoryService {
                             mileage!!,
                             station!!,
                             carId,
-                            isService!!
+                            isService!!,
+                            expenseId
                         )
                     }
                     else {
@@ -57,7 +61,8 @@ class HistoryService {
                             sum = sum!!,
                             mileage = mileage!!,
                             carId = carId,
-                            isService = isService!!
+                            isService = isService!!,
+                            expenseId = expenseId
                         )
                     }
                     Log.d("CZH", expense.isService.toString())
@@ -65,14 +70,27 @@ class HistoryService {
                     listHistory.add(expense)
                 }
                 listHistory = listHistory.sortedByDescending {it.mileage}.toMutableList()
+                val sortedListHistory = listHistory.sortedByDescending { it.mileage }
+                val sortedListHistoryId = listHistoryId.toMutableList()
                 adapter = HistoryItemAdapter(listHistory, object : HistoryItemAdapter.OnItemClickListener {
 
                     override fun onItemClick(position: Int) {
-                        val carId = listHistoryId[position]
+                        val expenseId = listHistory[position].expenseId
+                        val isService = listHistory[position].isService
+                        lateinit var intent: Intent
+                        if (isService) {
+                            intent = Intent(context, ServiceActivity::class.java)
+                        }
+                        else {
+                            intent = Intent(context, RefuelingActivity::class.java)
+                        }
+                        intent.putExtra("carId", carId)
+                        intent.putExtra("expenseId", expenseId)
+                        context.startActivity(intent)
                     }
                 })
 
-                callback.invoke(Triple(listHistoryId, listHistory, adapter))
+                callback.invoke(Triple(sortedListHistoryId.toMutableList(), sortedListHistory.toMutableList(), adapter))
             }
 
             override fun onCancelled(databaseError: DatabaseError) {

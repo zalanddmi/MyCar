@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".activities.RefuelingActivity">
 
+    <Button
+        android:id="@+id/buttonDeleteRefueling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#FF0000"
+        android:text="Удалить"
+        android:textColor="@color/white"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonReadyRefueling" />
+
     <TextView
         android:id="@+id/textViewRefueling"
         android:layout_width="wrap_content"
