@@ -36,4 +36,9 @@ class HistoryActivity : AppCompatActivity() {
             recyclerViewHistoryItems.adapter = adapter
         }
     }
+
+    override fun onBackPressed() {
+        controller.backToCarDetails(carId, this)
+        finish()
+    }
 }
