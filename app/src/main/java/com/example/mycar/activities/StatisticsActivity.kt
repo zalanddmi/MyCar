@@ -1,11 +1,13 @@
 package com.example.mycar.activities
 
+import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.TextView
 import com.example.mycar.R
 import com.example.mycar.controllers.StatisticsController
+import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -50,26 +52,120 @@ class StatisticsActivity : AppCompatActivity() {
         val firstDayOfMonth = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(calendar.time)
         editTextDateFromStatistics.setText(firstDayOfMonth)
 
-        controller.getExpenses(carId, editTextDateFromStatistics.text.toString(), editTextDateToStatistics.text.toString()) { result ->
-            textViewRefuelingDataStatistics.text = result.first
-            textViewServiceDataStatistics.text = result.second
-            textViewAllExpensesDataStatistics.text = result.third
+        updateStatistics()
+
+        editTextDateFromStatistics.setOnClickListener {
+            val currentDate = Calendar.getInstance()
+
+            val initialDate: Calendar
+            val currentDateString = editTextDateFromStatistics.text.toString()
+            if (currentDateString.isNotEmpty()) {
+                val date = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(currentDateString)
+                initialDate = Calendar.getInstance().apply {
+                    time = date
+                }
+            } else {
+                initialDate = currentDate
+            }
+
+            val datePickerDialog = DatePickerDialog(
+                this,
+                { _, year, month, dayOfMonth ->
+                    val selectedDate = Calendar.getInstance()
+                    selectedDate.set(year, month, dayOfMonth)
+
+                    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                    val formattedDate = dateFormat.format(selectedDate.time)
+
+                    editTextDateFromStatistics.setText(formattedDate)
+                    updateStatistics()
+                },
+                initialDate.get(Calendar.YEAR),
+                initialDate.get(Calendar.MONTH),
+                initialDate.get(Calendar.DAY_OF_MONTH)
+            )
+
+            datePickerDialog.show()
         }
 
-        controller.getMileage(carId, editTextDateFromStatistics.text.toString(), editTextDateToStatistics.text.toString()) { result ->
-            textViewMileageDataStatistics.text = result
-        }
+        editTextDateToStatistics.setOnClickListener {
+            val currentDate = Calendar.getInstance()
 
-        controller.getFuelMileage(carId, editTextDateFromStatistics.text.toString(), editTextDateToStatistics.text.toString()) { result ->
-            textViewFuelMileageDataStatistics.text = result
-        }
+            val initialDate: Calendar
+            val currentDateString = editTextDateToStatistics.text.toString()
+            if (currentDateString.isNotEmpty()) {
+                val date = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(currentDateString)
+                initialDate = Calendar.getInstance().apply {
+                    time = date
+                }
+            } else {
+                initialDate = currentDate
+            }
 
-        controller.getRefuelingMileage(carId, editTextDateFromStatistics.text.toString(), editTextDateToStatistics.text.toString()) { result ->
-            textViewRefuelingMileageDataStatistics.text = result
-        }
+            val datePickerDialog = DatePickerDialog(
+                this,
+                { _, year, month, dayOfMonth ->
+                    val selectedDate = Calendar.getInstance()
+                    selectedDate.set(year, month, dayOfMonth)
 
-        controller.getRefuelingDay(carId, editTextDateFromStatistics.text.toString(), editTextDateToStatistics.text.toString()) { result ->
-            textViewRefuelingDayDataStatistics.text = result
+                    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                    val formattedDate = dateFormat.format(selectedDate.time)
+
+                    editTextDateToStatistics.setText(formattedDate)
+                    updateStatistics()
+                },
+                initialDate.get(Calendar.YEAR),
+                initialDate.get(Calendar.MONTH),
+                initialDate.get(Calendar.DAY_OF_MONTH)
+            )
+
+            datePickerDialog.show()
+        }
+    }
+
+    private fun updateStatistics() {
+        val dateFrom = editTextDateFromStatistics.text.toString()
+        val dateTo = editTextDateToStatistics.text.toString()
+
+        if (isDatesValid(dateFrom, dateTo)) {
+            controller.getExpenses(carId, dateFrom, dateTo) { result ->
+                textViewRefuelingDataStatistics.text = result.first
+                textViewServiceDataStatistics.text = result.second
+                textViewAllExpensesDataStatistics.text = result.third
+            }
+
+            controller.getMileage(carId, dateFrom, dateTo) { result ->
+                textViewMileageDataStatistics.text = result
+            }
+
+            controller.getFuelMileage(carId, dateFrom, dateTo) { result ->
+                textViewFuelMileageDataStatistics.text = result
+            }
+
+            controller.getRefuelingMileage(carId, dateFrom, dateTo) { result ->
+                textViewRefuelingMileageDataStatistics.text = result
+            }
+
+            controller.getRefuelingDay(carId, dateFrom, dateTo) { result ->
+                textViewRefuelingDayDataStatistics.text = result
+            }
+        }
+        else {
+            Snackbar.make(findViewById(android.R.id.content), "Дата начала не может быть позже даты окончения", Snackbar.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun isDatesValid(dateFrom: String, dateTo: String): Boolean {
+        try {
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+
+            val startDate = dateFormat.parse(dateFrom)
+            val endDate = dateFormat.parse(dateTo)
+
+            return !startDate.after(endDate)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return false
         }
     }
 }
