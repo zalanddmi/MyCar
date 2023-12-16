@@ -3,6 +3,7 @@ package com.example.mycar.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import com.example.mycar.R
 import com.example.mycar.controllers.CarDetailsController
@@ -25,6 +26,8 @@ class CarDetailsActivity : AppCompatActivity() {
     private lateinit var textViewTypeFuelCarDetailsValue: TextView
     private lateinit var textViewVolumeFuelCarDetailsValue: TextView
     private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var buttonEditCarDetails: Button
+    private lateinit var buttonDeleteCarDetails: Button
 
     private lateinit var controller: CarDetailsController
 
@@ -43,6 +46,8 @@ class CarDetailsActivity : AppCompatActivity() {
         textViewTypeFuelCarDetailsValue = findViewById(R.id.textViewTypeFuelCarDetailsValue)
         textViewVolumeFuelCarDetailsValue = findViewById(R.id.textViewVolumeFuelCarDetailsValue)
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
+        buttonEditCarDetails = findViewById(R.id.buttonEditCarDetails)
+        buttonDeleteCarDetails = findViewById(R.id.buttonDeleteCarDetails)
 
         controller = CarDetailsController()
         val carId = intent.getStringExtra("carId")
@@ -58,6 +63,16 @@ class CarDetailsActivity : AppCompatActivity() {
             textViewStateNumberCarDetailsValue.text = details[7]
             textViewTypeFuelCarDetailsValue.text = details[8]
             textViewVolumeFuelCarDetailsValue.text = details[9]
+        }
+
+        buttonEditCarDetails.setOnClickListener {
+            val mileage = textViewMileageCarDetailsValue.text.toString().substring(0, textViewMileageCarDetailsValue.text.length - 3).toInt()
+            controller.updateCar(carId, mileage, this)
+        }
+
+        buttonDeleteCarDetails.setOnClickListener {
+            controller.deleteCar(carId, this)
+            finish()
         }
 
         bottomNavigationView.setOnItemSelectedListener { item ->
@@ -89,5 +104,10 @@ class CarDetailsActivity : AppCompatActivity() {
                 else -> false
             }
         }
+    }
+
+    override fun onBackPressed() {
+        controller.backToHome(this)
+        finish()
     }
 }

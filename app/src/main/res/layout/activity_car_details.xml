@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".activities.CarDetailsActivity">
 
+    <Button
+        android:id="@+id/buttonDeleteCarDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:backgroundTint="#FF0000"
+        android:text="Удалить"
+        android:textColor="@color/white"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/textViewVolumeFuelCarDetails"
         android:layout_width="wrap_content"
@@ -228,5 +241,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@navigation/bottom_nav_menu" />
+
+    <Button
+        android:id="@+id/buttonEditCarDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/black"
+        android:text="Изменить"
+        android:textColor="@color/white"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/buttonDeleteCarDetails"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

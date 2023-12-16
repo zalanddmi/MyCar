@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import com.example.mycar.adapters.CarItemAdapter
 import com.example.mycar.activities.CarDetailsActivity
+import com.example.mycar.activities.HomeActivity
 import com.example.mycar.entities.Car
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -14,6 +15,7 @@ import com.google.firebase.database.ValueEventListener
 class CarsService {
     private val db = FirebaseDatabase.getInstance()
     private val cars = db.getReference("Cars")
+    private val expenses = db.getReference("Expenses")
 
     fun isHaveCars(user: FirebaseUser?, callback: (Boolean) -> Unit) {
         val queryCars = cars.orderByChild("userId").equalTo(user?.uid)
@@ -88,5 +90,12 @@ class CarsService {
             override fun onCancelled(databaseError: DatabaseError) {
             }
         })
+    }
+
+    fun deleteCar(carId: String, context: Context) {
+        var car = cars.child(carId)
+        car.removeValue()
+        val intent = Intent(context, HomeActivity::class.java)
+        context.startActivity(intent)
     }
 }

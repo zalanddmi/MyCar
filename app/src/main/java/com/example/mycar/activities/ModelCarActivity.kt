@@ -21,6 +21,9 @@ class ModelCarActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_model_car)
 
+        var carId = intent.getStringExtra("carId")
+        var mileage = intent.getIntExtra("mileage", 0)
+
         client = OkHttpClient()
         gson = Gson()
         modelList = mutableListOf()
@@ -74,7 +77,15 @@ class ModelCarActivity : AppCompatActivity() {
 
         listViewModel.setOnItemClickListener { _, _, position, _ ->
             val model = modelAdapter.getItem(position)
-            val intent = Intent(this, MileageActivity::class.java)
+            lateinit var intent: Intent
+            if (carId != null) {
+                intent = Intent(this, AdditionalCarActivity::class.java)
+                intent.putExtra("carId", carId)
+                intent.putExtra("mileage", mileage)
+            }
+            else {
+                intent = Intent(this, MileageActivity::class.java)
+            }
             intent.putExtra("mark", selectedMarkName)
             intent.putExtra("model", model)
             startActivity(intent)

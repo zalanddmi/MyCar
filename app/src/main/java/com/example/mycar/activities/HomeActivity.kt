@@ -12,6 +12,7 @@ import com.example.mycar.entities.Car
 class HomeActivity : AppCompatActivity() {
     private lateinit var recyclerViewCarItems: RecyclerView
     private lateinit var buttonSignOutCarItems: Button
+    private lateinit var buttonAddCarHome: Button
 
     private lateinit var listCarId: MutableList<String>
     private lateinit var listCar: MutableList<Car>
@@ -25,6 +26,7 @@ class HomeActivity : AppCompatActivity() {
         recyclerViewCarItems = findViewById(R.id.recyclerViewCarItems)
         recyclerViewCarItems.layoutManager = LinearLayoutManager(this)
         buttonSignOutCarItems = findViewById(R.id.buttonSignOutCarItems)
+        buttonAddCarHome = findViewById(R.id.buttonAddCarHome)
 
         controller = HomeController()
         controller.getCars(this) { tripleCars ->
@@ -36,6 +38,10 @@ class HomeActivity : AppCompatActivity() {
         buttonSignOutCarItems.setOnClickListener {
             controller.signOut(this)
             finish()
+        }
+
+        buttonAddCarHome.setOnClickListener {
+            controller.addCar(this)
         }
     }
 }

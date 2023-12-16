@@ -44,6 +44,8 @@ class AdditionalCarActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_additional_car)
 
+        var carId = intent.getStringExtra("carId")
+
         editTextCarYear = findViewById(R.id.editTextCarYear)
         editTextVin = findViewById(R.id.editTextVin)
         spinnerTypeBody = findViewById(R.id.spinnerTypeBody)
@@ -116,13 +118,23 @@ class AdditionalCarActivity : AppCompatActivity() {
 
             val userId = FirebaseAuth.getInstance().currentUser?.uid.toString()
             val car = Car(mark, model, mileage, userId, carYear, vin, typeBody, color, stateNumber, typeFuel, volumeFuel)
-            val newCar = cars.push()
-            val uKey = newCar.key.toString()
-            cars.child(uKey).setValue(car)
-
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
-            finish()
+            lateinit var intent: Intent
+            if (carId != null) {
+                cars.child(carId).setValue(car)
+                intent = Intent(this, CarDetailsActivity::class.java)
+                intent.putExtra("carId", carId)
+                startActivity(intent)
+                finish()
+            }
+            else {
+                val newCar = cars.push()
+                val uKey = newCar.key.toString()
+                cars.child(uKey).setValue(car)
+                intent = Intent(this, CarDetailsActivity::class.java)
+                intent.putExtra("carId", uKey)
+                startActivity(intent)
+                finish()
+            }
         }
     }
 }

@@ -22,6 +22,9 @@ class MarkCarActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mark_car)
 
+        var carId = intent.getStringExtra("carId")
+        var mileage = intent.getIntExtra("mileage", 0)
+
         client = OkHttpClient()
         gson = Gson()
         markMap = mutableMapOf()
@@ -77,6 +80,10 @@ class MarkCarActivity : AppCompatActivity() {
 
             // Передайте выбранную марку в следующую Activity и откройте ее.
             val intent = Intent(this, ModelCarActivity::class.java)
+            if (carId != null) {
+                intent.putExtra("carId", carId)
+                intent.putExtra("mileage", mileage)
+            }
             intent.putExtra("selectedMarkId", selectedMarkId)
             intent.putExtra("selectedMarkName", selectedMarkName)
             startActivity(intent)
