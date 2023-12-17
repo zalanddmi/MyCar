@@ -19,19 +19,29 @@ class MileageActivity : AppCompatActivity() {
         buttonAddMileage.setOnClickListener {
             val mileageText = editTextMileage.text.toString()
 
-            val mileage = if (mileageText.isNotEmpty()) {
+            val mileage = if (mileageText.isNotEmpty() && mileageText.toInt() >= 0) {
                 try {
                     mileageText.toInt()
                 } catch (e: NumberFormatException) {
                     Snackbar.make(
                         findViewById(android.R.id.content),
-                        "Введите корректное значение для пробега (целое число).",
+                        "Введите корректное значение для пробега",
                         Snackbar.LENGTH_SHORT
                     ).show()
                     return@setOnClickListener
                 }
             } else {
-                0
+                if (mileageText.isNotEmpty() && mileageText.toInt() < 0) {
+                    Snackbar.make(
+                        findViewById(android.R.id.content),
+                        "Введите корректное значение для пробега",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
+                else {
+                    0
+                }
             }
 
             val mark = intent.getStringExtra("mark")

@@ -8,10 +8,11 @@
 
     <Spinner
         android:id="@+id/spinnerTypeFuel"
-        android:layout_width="220dp"
+        android:layout_width="0dp"
         android:layout_height="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="-8dp"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerColor"
+        app:layout_constraintStart_toStartOf="@+id/textViewTypeFuel"
         app:layout_constraintTop_toBottomOf="@+id/textViewTypeFuel" />
 
     <TextView
@@ -91,10 +92,12 @@
 
     <Spinner
         android:id="@+id/spinnerTypeBody"
-        android:layout_width="220dp"
+        android:layout_width="0dp"
         android:layout_height="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="-8dp"
+        android:layout_marginEnd="-24dp"
+        app:layout_constraintEnd_toEndOf="@+id/editTextVin"
+        app:layout_constraintStart_toStartOf="@+id/textViewTypeBody"
         app:layout_constraintTop_toBottomOf="@+id/textViewTypeBody" />
 
     <TextView
@@ -108,10 +111,11 @@
 
     <Spinner
         android:id="@+id/spinnerColor"
-        android:layout_width="220dp"
+        android:layout_width="0dp"
         android:layout_height="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="-8dp"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerTypeBody"
+        app:layout_constraintStart_toStartOf="@+id/textViewColor"
         app:layout_constraintTop_toBottomOf="@+id/textViewColor" />
 
     <TextView
