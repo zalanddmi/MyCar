@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.Spinner
 import com.example.mycar.R
 import com.example.mycar.controllers.ServiceController
+import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -110,15 +111,69 @@ class ServiceActivity : AppCompatActivity() {
 
         buttonReadyService.setOnClickListener {
             date = editTextDateService.text.toString()
+            if (date.isNullOrEmpty()) {
+                Snackbar.make(
+                    findViewById(android.R.id.content),
+                    "Выберете дату",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+            if (type == "") {
+                Snackbar.make(
+                    findViewById(android.R.id.content),
+                    "Выберете услугу",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
             sum = if (!editTextSumService.text.isNullOrEmpty()) editTextSumService.text.toString().toDouble() else 0.0
+            if (sum == 0.0) {
+                Snackbar.make(
+                    findViewById(android.R.id.content),
+                    "Введите сумму",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
             mileage = if (!editTextMileageService.text.isNullOrEmpty()) editTextMileageService.text.toString().toInt() else 0
+            if (mileage == 0) {
+                Snackbar.make(
+                    findViewById(android.R.id.content),
+                    "Введите пробег",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
             if (expenseId != null) {
-                controller.updateService(expenseId, date, type, sum, mileage, carId, this)
+                controller.updateService(expenseId, date, type, sum, mileage, carId, this) { flag, text ->
+                    if (!flag) {
+                        Snackbar.make(
+                            findViewById(android.R.id.content),
+                            text!!,
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    }
+                    else {
+                        finish()
+                    }
+                }
             }
             else {
-                controller.addService(date, type, sum, mileage, carId)
+                controller.addService(date, type, sum, mileage, carId) { flag, text ->
+                    if (!flag) {
+                        Snackbar.make(
+                            findViewById(android.R.id.content),
+                            text!!,
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    }
+                    else {
+                        controller.navigateToDetails(carId, this)
+                        finish()
+                    }
+                }
             }
-            finish()
         }
 
         buttonDeleteService.setOnClickListener {

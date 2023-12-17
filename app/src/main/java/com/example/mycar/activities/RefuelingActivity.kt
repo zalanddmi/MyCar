@@ -14,6 +14,7 @@ import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mycar.R
 import com.example.mycar.controllers.RefuelingController
+import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -123,17 +124,79 @@ class RefuelingActivity : AppCompatActivity() {
 
         buttonReadyRefueling.setOnClickListener {
             date = editTextDateRefueling.text.toString()
+            if (date.isNullOrEmpty()) {
+                Snackbar.make(
+                    findViewById(android.R.id.content),
+                    "Выберете дату",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+            if (typeFuel == "") {
+                Snackbar.make(
+                    findViewById(android.R.id.content),
+                    "Выберете вид топлива",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
             sum = if (!editTextSumRefueling.text.isNullOrEmpty()) editTextSumRefueling.text.toString().toDouble() else 0.0
+            if (sum == 0.0) {
+                Snackbar.make(
+                    findViewById(android.R.id.content),
+                    "Введите сумму",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
             volume = if (!editTextVolumeRefueling.text.isNullOrEmpty()) editTextVolumeRefueling.text.toString().toDouble() else 0.0
+            if (volume == 0.0) {
+                Snackbar.make(
+                    findViewById(android.R.id.content),
+                    "Введите кол-во залитого топлива",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
             mileage = if (!editTextMileageRefueling.text.isNullOrEmpty()) editTextMileageRefueling.text.toString().toInt() else 0
+            if (mileage == 0) {
+                Snackbar.make(
+                    findViewById(android.R.id.content),
+                    "Введите пробег",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
             station = if (!editTextStationRefueling.text.isNullOrEmpty()) editTextStationRefueling.text.toString() else ""
             if (expenseId != null) {
-                controller.updateRefueling(expenseId, date, typeFuel, sum, volume, mileage, station, carId, this)
+                controller.updateRefueling(expenseId, date, typeFuel, sum, volume, mileage, station, carId, this) { flag, text ->
+                    if (!flag) {
+                        Snackbar.make(
+                            findViewById(android.R.id.content),
+                            text!!,
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    }
+                    else {
+                        finish()
+                    }
+                }
             }
             else {
-                controller.addRefueling(date, typeFuel, sum, volume, mileage, station, carId)
+                controller.addRefueling(date, typeFuel, sum, volume, mileage, station, carId) { flag, text ->
+                    if (!flag) {
+                        Snackbar.make(
+                            findViewById(android.R.id.content),
+                            text!!,
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    }
+                    else {
+                        controller.navigateToDetails(carId, this)
+                        finish()
+                    }
+                }
             }
-            finish()
         }
 
         buttonDeleteRefueling.setOnClickListener {

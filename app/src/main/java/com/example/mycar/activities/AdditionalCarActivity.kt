@@ -10,10 +10,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import com.example.mycar.R
+import com.example.mycar.controllers.AdditionalCarController
 import com.example.mycar.entities.Car
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import java.util.Calendar
 
 class AdditionalCarActivity : AppCompatActivity() {
     private lateinit var editTextCarYear: EditText
@@ -24,6 +27,8 @@ class AdditionalCarActivity : AppCompatActivity() {
     private lateinit var spinnerTypeFuel: Spinner
     private lateinit var editTextVolumeFuel: EditText
     private lateinit var buttonReadyCar: Button
+
+    private lateinit var controller: AdditionalCarController
 
     private var carYear: Int = 0
     private var vin: String? = null
@@ -54,6 +59,8 @@ class AdditionalCarActivity : AppCompatActivity() {
         spinnerTypeFuel = findViewById(R.id.spinnerTypeFuel)
         editTextVolumeFuel = findViewById(R.id.editTextVolumeFuel)
         buttonReadyCar = findViewById(R.id.buttonReadyCar)
+
+        controller = AdditionalCarController()
 
         db = FirebaseDatabase.getInstance()
         cars = db.getReference("Cars")
@@ -107,11 +114,71 @@ class AdditionalCarActivity : AppCompatActivity() {
             }
         }
 
+        if (carId != null) {
+            controller.getCarDetails(carId!!) { details ->
+                editTextCarYear.setText(details[3])
+                editTextVin.setText(details[4])
+                var index = typeBodyList.indexOf(details[5])
+                spinnerTypeBody.setSelection(index)
+                index = colorList.indexOf(details[6])
+                spinnerColor.setSelection(index)
+                editTextStateNumber.setText(details[7])
+                index = typeFuelList.indexOf(details[8])
+                spinnerTypeFuel.setSelection(index)
+                editTextVolumeFuel.setText(details[9])
+            }
+        }
+
         buttonReadyCar.setOnClickListener {
-            carYear = if (!editTextCarYear.text.isNullOrEmpty()) editTextCarYear.text.toString().toInt() else 0
-            vin = if (!editTextVin.text.isNullOrEmpty()) editTextVin.text.toString() else null
-            stateNumber = if (!editTextStateNumber.text.isNullOrEmpty()) editTextStateNumber.text.toString() else null
-            volumeFuel = if (!editTextVolumeFuel.text.isNullOrEmpty()) editTextVolumeFuel.text.toString().toInt() else 0
+            val carYearText = editTextCarYear.text.toString()
+            carYear = if (carYearText.isNotEmpty()) {
+                val year = carYearText.toIntOrNull()
+                if (year != null && year in 1900..Calendar.getInstance().get(Calendar.YEAR)) {
+                    year
+                } else {
+                    Snackbar.make(
+                        findViewById(android.R.id.content),
+                        "Введите корректный год",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
+            } else {
+                0
+            }
+
+            val vinText = editTextVin.text.toString()
+            vin = if (vinText.isNotEmpty()) {
+                if (vinText.length == 17) {
+                    vinText
+                } else {
+                    Snackbar.make(
+                        findViewById(android.R.id.content),
+                        "Введите корректный VIN (17 символов)",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
+            } else {
+                null
+            }
+
+            val volumeFuelText = editTextVolumeFuel.text.toString()
+            volumeFuel = if (volumeFuelText.isNotEmpty()) {
+                try {
+                    volumeFuelText.toInt()
+                } catch (e: NumberFormatException) {
+                    Snackbar.make(
+                        findViewById(android.R.id.content),
+                        "Введите корректный объем топлива (целое число)",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
+            } else {
+                0
+            }
+            stateNumber = editTextStateNumber.text.toString().ifEmpty { null }
             val mark = intent.getStringExtra("mark").toString()
             val model = intent.getStringExtra("model").toString()
             val mileage = intent.getIntExtra("mileage", 0)

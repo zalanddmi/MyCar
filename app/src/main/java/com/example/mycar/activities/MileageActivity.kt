@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import com.example.mycar.R
+import com.google.android.material.snackbar.Snackbar
 
 class MileageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,10 +15,25 @@ class MileageActivity : AppCompatActivity() {
 
         val buttonAddMileage = findViewById<Button>(R.id.buttonAddMileage)
         val editTextMileage = findViewById<EditText>(R.id.editTextMileage)
-        var mileage = 0
 
         buttonAddMileage.setOnClickListener {
-            mileage = if (!editTextMileage.text.isNullOrEmpty()) editTextMileage.text.toString().toInt() else 0
+            val mileageText = editTextMileage.text.toString()
+
+            val mileage = if (mileageText.isNotEmpty()) {
+                try {
+                    mileageText.toInt()
+                } catch (e: NumberFormatException) {
+                    Snackbar.make(
+                        findViewById(android.R.id.content),
+                        "Введите корректное значение для пробега (целое число).",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
+            } else {
+                0
+            }
+
             val mark = intent.getStringExtra("mark")
             val model = intent.getStringExtra("model")
             val intent = Intent(this, AdditionalCarActivity::class.java)
